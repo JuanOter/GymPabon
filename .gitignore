@@ -22,3 +22,18 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# NetBeans y Maven
+nbproject/private/
+build/
+dist/
+target/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Configuración local (contraseñas de la BD)
+*.env
+application-local.properties
