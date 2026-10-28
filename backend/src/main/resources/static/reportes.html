@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Reportes</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header">
+<div><h1>Reportes</h1><p>Ingresos, clientes y asistencia del periodo. Solo el administrador puede verlos.</p></div>
+<div class="actions">
+<div><label class="lbl" for="from">Desde</label><input class="inp" id="from" type="date"></div>
+<div><label class="lbl" for="to">Hasta</label><input class="inp" id="to" type="date"></div>
+</div>
+</header>
+<div id="message" hidden></div>
+<div class="row">
+<section class="card grow form"><h2>Ingresos por plan</h2><div class="form" id="income"></div><p id="income-total" style="margin:0;font-weight:700"></p></section>
+<section class="card side form"><h2>Clientes activos por plan</h2><div class="form" id="clients-by-plan"></div></section>
+</div>
+<div class="row">
+<section class="card flush grow">
+<div class="card-head"><h2>Entradas permitidas por día</h2></div>
+<div class="table-wrap"><table><thead><tr><th scope="col">Día</th><th scope="col">Entradas</th><th scope="col" style="width:60%"><span class="sr-only">Gráfica</span></th></tr></thead><tbody id="attendance"></tbody></table></div>
+</section>
+<section class="card flush side">
+<div class="card-head"><h2>Membresías por vencer</h2>
+<select class="inp" id="days" style="width:auto"><option value="7">7 días</option><option value="15">15 días</option><option value="30">30 días</option></select></div>
+<div class="table-wrap"><table><thead><tr><th scope="col">Cliente</th><th scope="col">Plan</th><th scope="col">Vence</th></tr></thead><tbody id="expiring"></tbody></table></div>
+</section>
+</div>
+</main>
+</div>
+<script type="module" src="js/reportes.js"></script>
+</body>
+</html>

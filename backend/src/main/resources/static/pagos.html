@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Pagos</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header"><div><h1>Pagos</h1><p>Cada membresía se paga completa en un solo pago. Los pagos no se eliminan; solo el administrador puede anularlos.</p></div></header>
+<div id="message" hidden></div>
+<div class="row">
+<section class="card side" style="flex:1 1 340px">
+<form id="payment-form" class="form" style="gap:16px" novalidate>
+<h2>Registrar pago</h2>
+<div><label class="lbl" for="membership">Membresía pendiente</label><select class="inp" id="membership"></select></div>
+<dl class="kv">
+<div><dt>Periodo</dt><dd id="period">—</dd></div>
+<div><dt>Valor a pagar</dt><dd id="amount" style="font-size:18px;font-weight:800">—</dd></div>
+</dl>
+<fieldset><legend class="lbl">Método de pago</legend>
+<div class="choices cols3" id="methods">
+<button type="button" class="choice small" data-method="CASH" aria-pressed="true">Efectivo</button>
+<button type="button" class="choice small" data-method="TRANSFER" aria-pressed="false">Transferencia</button>
+<button type="button" class="choice small" data-method="CARD" aria-pressed="false">Tarjeta</button>
+</div></fieldset>
+<div><label class="lbl" for="payment-date">Fecha del pago</label><input class="inp" id="payment-date" readonly></div>
+<button class="btn" type="submit" id="submit">Registrar pago</button>
+<div class="msg ok" id="pay-result" role="status" hidden></div>
+</form>
+</section>
+<section class="card flush grow" style="flex-basis:760px">
+<div class="card-head"><h2>Pagos recientes</h2><span class="stat-sub" id="void-note">Solo el administrador puede anular</span></div>
+<div class="filters">
+<div class="wide"><label class="lbl" for="client-filter">Cliente</label><input class="inp" id="client-filter" type="search" placeholder="Documento o nombre"></div>
+<div><label class="lbl" for="from">Desde</label><input class="inp" id="from" type="date"></div>
+<div><label class="lbl" for="to">Hasta</label><input class="inp" id="to" type="date"></div>
+<div><label class="lbl" for="method-filter">Método</label>
+<select class="inp" id="method-filter"><option value="">Todos</option><option value="CASH">Efectivo</option><option value="TRANSFER">Transferencia</option><option value="CARD">Tarjeta</option></select></div>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Fecha</th><th scope="col">Cliente</th><th scope="col">Concepto</th><th scope="col">Método</th><th scope="col">Valor</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acción</span></th></tr></thead>
+<tbody id="payments"></tbody>
+</table></div>
+<p class="note" id="total"></p>
+</section>
+</div>
+</main>
+</div>
+<script type="module" src="js/pagos.js"></script>
+</body>
+</html>

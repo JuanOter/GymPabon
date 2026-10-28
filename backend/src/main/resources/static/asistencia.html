@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Asistencia</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header">
+<div><h1>Registrar ingreso</h1><p>El sistema valida que la membresía esté activa y que el plan permita entrar en este día y hora.</p></div>
+<span class="now" id="now"></span>
+</header>
+<section class="card form">
+<form id="entry-form" style="display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end" novalidate>
+<div style="flex:1 1 280px"><label class="lbl" for="document">Documento del cliente</label><input class="inp" id="document" inputmode="numeric" autofocus placeholder="Ej. 1065789012" style="height:44px;font-size:16px"></div>
+<button class="btn" type="submit" id="submit">Registrar ingreso</button>
+</form>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center" id="recent-wrap" hidden>
+<span class="hint" style="margin:0">Recientes:</span><span id="recent" style="display:contents"></span>
+</div>
+<div id="result" hidden></div>
+</section>
+<section class="card flush">
+<div class="card-head"><h2>Historial de ingresos</h2><span class="stat-sub" id="today-summary"></span></div>
+<div class="filters">
+<div class="wide"><label class="lbl" for="client-filter">Cliente</label><input class="inp" id="client-filter" type="search" placeholder="Documento o nombre"></div>
+<div><label class="lbl" for="from">Desde</label><input class="inp" id="from" type="date"></div>
+<div><label class="lbl" for="to">Hasta</label><input class="inp" id="to" type="date"></div>
+<div><label class="lbl" for="result-filter">Resultado</label>
+<select class="inp" id="result-filter"><option value="">Todos</option><option value="yes">Permitido</option><option value="no">Rechazado</option></select></div>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Fecha y hora</th><th scope="col">Cliente</th><th scope="col">Plan</th><th scope="col">Resultado</th><th scope="col">Motivo</th></tr></thead>
+<tbody id="history"></tbody>
+</table></div>
+</section>
+</main>
+</div>
+<script type="module" src="js/asistencia.js"></script>
+</body>
+</html>
