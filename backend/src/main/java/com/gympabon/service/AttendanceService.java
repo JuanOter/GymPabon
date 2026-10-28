@@ -14,6 +14,7 @@ import com.gympabon.model.User;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -77,6 +78,26 @@ public class AttendanceService {
      */
     public List<Attendance> listByDate(LocalDate date) {
         return attendanceDAO.findByDate(date == null ? LocalDate.now() : date);
+    }
+
+    /**
+     * Returns the entry attempts between two dates, both included (RF13).
+     *
+     * @param from first day of the period
+     * @param to   last day of the period
+     * @return the records of the period, newest first
+     * @throws BusinessRuleException if a date is missing or the period is reversed
+     */
+    public List<Attendance> listByDateRange(LocalDate from, LocalDate to) {
+        if (from == null || to == null) {
+            throw new BusinessRuleException("Debe indicar la fecha inicial y la final");
+        }
+        if (from.isAfter(to)) {
+            throw new BusinessRuleException("La fecha inicial no puede ser posterior a la final");
+        }
+        List<Attendance> records = new ArrayList<>(attendanceDAO.findByDateRange(from, to));
+        records.sort(Comparator.comparing(Attendance::getDateTime).reversed());
+        return records;
     }
 
     /**
