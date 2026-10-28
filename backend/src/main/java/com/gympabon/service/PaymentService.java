@@ -12,6 +12,7 @@ import com.gympabon.model.User;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Business rules for collecting and voiding membership payments.
@@ -38,7 +39,9 @@ public class PaymentService {
 
     /**
      * Registers the full payment of a membership pending payment. The
-     * membership becomes active, or scheduled if it starts later.
+     * membership becomes active, or scheduled if it starts later. Saving the
+     * payment and updating the membership run in one transaction: if either
+     * fails, neither is saved.
      *
      * @param membershipId identifier of the membership
      * @param method       payment method
@@ -47,6 +50,7 @@ public class PaymentService {
      * @throws NotFoundException     if the membership does not exist
      * @throws BusinessRuleException if the membership is not pending payment or data is missing
      */
+    @Transactional
     public Payment registerPayment(int membershipId, PaymentMethod method, User registeredBy) {
         Membership membership = findMembership(membershipId);
         if (membership.getStatus() != MembershipStatus.PENDING_PAYMENT) {
@@ -67,7 +71,8 @@ public class PaymentService {
 
     /**
      * Voids a payment with its reason; the membership goes back to pending
-     * payment. Only the administrator can do it.
+     * payment. Only the administrator can do it. Both changes run in one
+     * transaction.
      *
      * @param paymentId identifier of the payment
      * @param reason    why it is voided
@@ -76,6 +81,7 @@ public class PaymentService {
      * @throws BusinessRuleException if the user is not an administrator, the
      *                               reason is empty or the payment was already voided
      */
+    @Transactional
     public void voidPayment(int paymentId, String reason, User admin) {
         if (admin == null || !admin.isAdmin()) {
             throw new BusinessRuleException("Solo el administrador puede anular pagos");
