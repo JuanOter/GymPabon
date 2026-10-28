@@ -82,4 +82,12 @@ public class ClientController {
         sessionManager.requireUser(session);
         clientService.deactivateClient(id);
     }
+
+    /** PATCH /api/clients/{id}/activate */
+    @PatchMapping("/{id}/activate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void activate(@PathVariable("id") int id, HttpSession session) {
+        sessionManager.requireUser(session);
+        clientService.activateClient(id);
+    }
 }
