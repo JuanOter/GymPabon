@@ -1,0 +1,14 @@
+# Build output
+target/
+
+# Local credentials (never commit)
+src/main/resources/application-local.properties
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# OS
+.DS_Store
+Thumbs.db
