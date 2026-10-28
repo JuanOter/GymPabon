@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Iniciar sesión</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="login">
+<section class="login-hero">
+<div class="brand" style="padding:0">GymPabon</div>
+<div>
+<h1>Más fuerte cada día.</h1>
+<p>La constancia de hoy es la fuerza de mañana. Bienvenido al equipo GymPabon.</p>
+</div>
+<p style="font-size:14px">Valledupar · Lunes a viernes 5:00 a. m. a 10:00 p. m.</p>
+</section>
+<section class="login-form">
+<form id="login-form" class="form" novalidate>
+<h1>Iniciar sesión</h1>
+<p style="margin:0;color:#4B5563">Ingresa con tu usuario de administrador o recepcionista.</p>
+<div id="message" hidden></div>
+<div><label class="lbl" for="username">Usuario</label><input class="inp" id="username" autocomplete="username" required></div>
+<div><label class="lbl" for="password">Contraseña</label><input class="inp" id="password" type="password" autocomplete="current-password" required></div>
+<button class="btn" type="submit" id="submit">Ingresar</button>
+<p style="margin:0;font-size:13px;color:#4B5563">¿Olvidaste tu contraseña? Pídele al administrador que la restablezca.</p>
+</form>
+</section>
+</div>
+<script type="module" src="js/login.js"></script>
+</body>
+</html>

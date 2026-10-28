@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Clientes</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header"><div><h1>Clientes</h1><p>Registra, busca, actualiza o inactiva clientes. El documento no se puede repetir.</p></div></header>
+<div id="message" hidden></div>
+<div class="row">
+<section class="card flush grow" style="flex-basis:830px">
+<div class="card-head" style="align-items:flex-end">
+<div style="flex:1 1 260px"><label class="lbl" for="search">Buscar cliente</label><input class="inp" id="search" type="search" placeholder="Documento o nombre"></div>
+<div style="flex:0 1 180px"><label class="lbl" for="status-filter">Estado de membresía</label>
+<select class="inp" id="status-filter">
+<option value="">Todos</option>
+<option value="ACTIVE">Activa</option>
+<option value="EXPIRED">Vencida</option>
+<option value="PENDING_PAYMENT">Pendiente de pago</option>
+<option value="INACTIVE">Cliente inactivo</option>
+</select></div>
+</div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Documento</th><th scope="col">Nombre</th><th scope="col">Teléfono</th><th scope="col">Plan</th><th scope="col">Vence</th><th scope="col">Membresía</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead>
+<tbody id="clients"></tbody>
+</table></div>
+<p class="note" id="count"></p>
+</section>
+<section class="card side">
+<form id="client-form" class="form" novalidate>
+<h2 id="form-title">Registrar cliente</h2>
+<div><label class="lbl" for="documentNumber">Número de documento</label><input class="inp" id="documentNumber" inputmode="numeric" placeholder="Solo números"></div>
+<div class="grid2">
+<div><label class="lbl" for="firstName">Nombres</label><input class="inp" id="firstName"></div>
+<div><label class="lbl" for="lastName">Apellidos</label><input class="inp" id="lastName"></div>
+</div>
+<div><label class="lbl" for="birthDate">Fecha de nacimiento</label><input class="inp" id="birthDate" type="date"></div>
+<div><label class="lbl" for="phone">Teléfono</label><input class="inp" id="phone" type="tel"></div>
+<div><label class="lbl" for="email">Correo electrónico</label><input class="inp" id="email" type="email" placeholder="nombre@correo.com"></div>
+<div class="actions">
+<button class="btn" type="submit" id="submit">Guardar y asignar membresía</button>
+<button class="btn2" type="reset" id="clear">Limpiar</button>
+</div>
+</form>
+</section>
+</div>
+</main>
+</div>
+<script type="module" src="js/clientes.js"></script>
+</body>
+</html>

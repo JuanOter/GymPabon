@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Usuarios</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header"><div><h1>Usuarios del sistema</h1><p>Solo el administrador crea, edita y desactiva usuarios. Las contraseñas se guardan cifradas.</p></div></header>
+<div id="message" hidden></div>
+<div class="row">
+<section class="card flush grow" style="flex-basis:700px">
+<div class="card-head"><h2>Usuarios</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Usuario</th><th scope="col">Nombre</th><th scope="col">Rol</th><th scope="col">Último ingreso</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead>
+<tbody id="users"></tbody>
+</table></div>
+</section>
+<section class="card side">
+<form id="user-form" class="form" novalidate>
+<h2 id="form-title">Crear usuario</h2>
+<div class="grid2">
+<div><label class="lbl" for="firstName">Nombres</label><input class="inp" id="firstName"></div>
+<div><label class="lbl" for="lastName">Apellidos</label><input class="inp" id="lastName"></div>
+</div>
+<div><label class="lbl" for="documentNumber">Documento</label><input class="inp" id="documentNumber" inputmode="numeric" placeholder="Solo números"></div>
+<div><label class="lbl" for="username">Usuario</label><input class="inp" id="username" autocomplete="off" placeholder="Sin espacios"></div>
+<div><label class="lbl" for="role">Rol</label><select class="inp" id="role"><option value="RECEPTIONIST">Recepcionista</option><option value="ADMIN">Administrador</option></select></div>
+<div id="password-field"><label class="lbl" for="temporaryPassword">Contraseña temporal</label><input class="inp" id="temporaryPassword" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres"></div>
+<div class="actions"><button class="btn" type="submit" id="submit">Crear usuario</button><button class="btn2" type="reset" id="clear">Limpiar</button></div>
+</form>
+</section>
+</div>
+<section class="card flush">
+<div class="card-head"><h2>Permisos por rol</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Función</th><th scope="col">Administrador</th><th scope="col">Recepcionista</th></tr></thead>
+<tbody>
+<tr><td>Registrar y actualizar clientes</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+<tr><td>Asignar y renovar membresías</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+<tr><td>Registrar pagos y asistencia</td><td class="yes">Sí</td><td class="yes">Sí</td></tr>
+<tr><td>Cancelar membresías y anular pagos</td><td class="yes">Sí</td><td class="no">No</td></tr>
+<tr><td>Configurar planes y gestionar entrenadores</td><td class="yes">Sí</td><td class="no">No</td></tr>
+<tr><td>Gestionar usuarios y ver reportes</td><td class="yes">Sí</td><td class="no">No</td></tr>
+</tbody>
+</table></div>
+</section>
+</main>
+</div>
+<script type="module" src="js/usuarios.js"></script>
+</body>
+</html>
