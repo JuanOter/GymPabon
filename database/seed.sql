@@ -4,6 +4,7 @@
 -- All demo users have the password: GymPabon2026
 -- =============================================================
 USE gympabon;
+SET NAMES utf8mb4;
 
 -- Plans
 INSERT INTO plan (id, plan_type, name, monthly_price, description) VALUES
