@@ -153,6 +153,53 @@ public class MembershipService {
     }
 
     /**
+     * Returns every membership, newest first. The screens use it to show the
+     * plan and status of each client in a single request.
+     *
+     * @return all the memberships
+     */
+    public List<Membership> listAll() {
+        return membershipDAO.findAll();
+    }
+
+    /**
+     * Assigns another trainer to a current Premium membership. The new trainer
+     * must be active and have a free slot; the slot of the previous trainer is
+     * released (RF11).
+     *
+     * @param membershipId identifier of the membership
+     * @param trainerId    identifier of the new trainer
+     * @return the updated membership
+     * @throws NotFoundException     if the membership or the trainer do not exist
+     * @throws BusinessRuleException if the membership is not a current Premium one, or
+     *                               the trainer is the same, inactive or has no slots
+     */
+    public Membership changeTrainer(int membershipId, int trainerId) {
+        Membership membership = findById(membershipId);
+        if (!membership.getPlan().includesTrainer()) {
+            throw new BusinessRuleException("Solo las membresías Premium tienen entrenador");
+        }
+        if (!CURRENT_STATUSES.contains(membership.getStatus())) {
+            throw new BusinessRuleException("La membresía ya está vencida o cancelada");
+        }
+        Trainer previous = membership.getTrainer();
+        if (previous != null && previous.getId() == trainerId) {
+            throw new BusinessRuleException("El cliente ya tiene asignado a ese entrenador");
+        }
+        Trainer trainer = trainerDAO.findById(trainerId);
+        if (trainer == null) {
+            throw new NotFoundException("El entrenador no existe");
+        }
+        trainer.assignMembership(membership);
+        if (previous != null) {
+            previous.releaseMembership(membership);
+        }
+        membership.setTrainer(trainer);
+        membershipDAO.update(membership);
+        return membership;
+    }
+
+    /**
      * Returns the membership history of a client, newest first.
      *
      * @param clientId identifier of the client

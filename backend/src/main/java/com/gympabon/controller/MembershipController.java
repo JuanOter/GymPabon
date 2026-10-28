@@ -5,6 +5,8 @@ import com.gympabon.controller.dto.DurationResponse;
 import com.gympabon.controller.dto.MembershipRequest;
 import com.gympabon.controller.dto.MembershipResponse;
 import com.gympabon.controller.dto.RenewalRequest;
+import com.gympabon.controller.dto.TrainerChangeRequest;
+import com.gympabon.model.Membership;
 import com.gympabon.model.MembershipDuration;
 import com.gympabon.service.MembershipService;
 import jakarta.servlet.http.HttpSession;
@@ -38,11 +40,18 @@ public class MembershipController {
         this.sessionManager = sessionManager;
     }
 
-    /** GET /api/memberships?clientId=3: membership history of a client. */
+    /**
+     * GET /api/memberships?clientId=3: membership history of a client. Without
+     * clientId it returns every membership (used by the lists of the screens).
+     */
     @GetMapping
-    public List<MembershipResponse> findByClient(@RequestParam("clientId") int clientId, HttpSession session) {
+    public List<MembershipResponse> findByClient(@RequestParam(name = "clientId", required = false) Integer clientId,
+                                                 HttpSession session) {
         sessionManager.requireUser(session);
-        return membershipService.findByClient(clientId).stream().map(MembershipResponse::from).toList();
+        List<Membership> memberships = clientId == null
+                ? membershipService.listAll()
+                : membershipService.findByClient(clientId);
+        return memberships.stream().map(MembershipResponse::from).toList();
     }
 
     /** GET /api/memberships/{id} */
@@ -92,6 +101,14 @@ public class MembershipController {
         sessionManager.requireAdmin(session);
         membershipService.cancelMembership(id, request.reason());
         return MembershipResponse.from(membershipService.findById(id));
+    }
+
+    /** PATCH /api/memberships/{id}/trainer (administrator): assigns another trainer to a Premium membership. */
+    @PatchMapping("/{id}/trainer")
+    public MembershipResponse changeTrainer(@PathVariable("id") int id, @RequestBody TrainerChangeRequest request,
+                                            HttpSession session) {
+        sessionManager.requireAdmin(session);
+        return MembershipResponse.from(membershipService.changeTrainer(id, request.trainerId()));
     }
 
     /** POST /api/memberships/refresh (administrator): updates the statuses for today. */

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Membresías</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header">
+<div><h1>Membresías</h1><p>El sistema calcula fechas y valor. La membresía queda Pendiente de pago hasta registrar el pago.</p></div>
+<div class="toggle" role="group" aria-label="Tipo de operación">
+<button type="button" data-mode="new" aria-pressed="true">Nueva membresía</button>
+<button type="button" data-mode="renew" aria-pressed="false">Renovación</button>
+</div>
+</header>
+<div id="message" hidden></div>
+<form class="row" id="membership-form" novalidate>
+<div class="grow form" style="gap:16px">
+<section class="card form" style="gap:18px">
+<div>
+<label class="lbl" for="client">Cliente</label>
+<input class="inp" id="client" type="search" list="client-options" placeholder="Documento o nombre" autocomplete="off">
+<datalist id="client-options"></datalist>
+<p class="hint" id="client-hint">Escriba el documento o el nombre y elija el cliente.</p>
+</div>
+<fieldset><legend class="lbl">Plan</legend><div class="choices cols3" id="plans"></div></fieldset>
+<div class="callout" id="trainer-field" hidden>
+<label class="lbl" for="trainer">Entrenador asignado (obligatorio en Premium)</label>
+<select class="inp" id="trainer"></select>
+<p class="hint">Un entrenador atiende como máximo 20 clientes Premium.</p>
+</div>
+<fieldset><legend class="lbl">Duración</legend><div class="choices cols4" id="durations"></div></fieldset>
+<div class="grid2">
+<div><label class="lbl" for="startDate">Fecha de inicio</label><input class="inp" id="startDate" type="date"></div>
+<div><label class="lbl" for="endDate">Fecha de fin (calculada)</label><input class="inp" id="endDate" readonly></div>
+</div>
+<div class="form" id="current" hidden style="border-top:1px solid #E5E7EB;padding-top:16px;gap:12px">
+<h2>Membresía actual</h2>
+<p style="margin:0;font-size:14px" id="current-text"></p>
+</div>
+</section>
+<section class="card flush" id="history-card" hidden>
+<div class="card-head"><h2>Historial del cliente</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Plan</th><th scope="col">Duración</th><th scope="col">Inicio</th><th scope="col">Fin</th><th scope="col">Valor</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead>
+<tbody id="history"></tbody>
+</table></div>
+<div class="form" id="cancel-form" hidden style="padding:0 20px 20px;gap:10px">
+<label class="lbl" for="cancel-reason" style="margin:0">Motivo de la cancelación</label>
+<textarea class="inp" id="cancel-reason" rows="2"></textarea>
+<div class="actions"><button class="btnd" type="button" id="confirm-cancel">Confirmar cancelación</button><button class="btn2" type="button" id="close-cancel">Volver</button></div>
+</div>
+</section>
+</div>
+<aside class="card side form" style="gap:12px">
+<h2>Resumen</h2>
+<dl class="kv">
+<div><dt>Operación</dt><dd id="sum-mode">Nueva membresía</dd></div>
+<div><dt>Plan</dt><dd id="sum-plan">—</dd></div>
+<div><dt>Precio mensual × meses</dt><dd id="sum-subtotal">—</dd></div>
+<div><dt id="sum-discount-label">Descuento</dt><dd id="sum-discount">—</dd></div>
+<div><dt>Matrícula</dt><dd id="sum-fee">—</dd></div>
+<div class="total"><dt>Total</dt><dd id="total">—</dd></div>
+</dl>
+<p class="state-note" id="state-note">Estado al guardar: Pendiente de pago.</p>
+<button class="btn" type="submit" id="submit" disabled>Guardar y registrar pago</button>
+<a class="btn2" href="clientes.html">Cancelar</a>
+</aside>
+</form>
+</main>
+</div>
+<script type="module" src="js/membresias.js"></script>
+</body>
+</html>

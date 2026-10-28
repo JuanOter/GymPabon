@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Planes</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header"><div><h1>Planes</h1><p>El administrador puede actualizar el precio mensual y la descripción. Horario del gimnasio: L–V 5:00 a. m. a 10:00 p. m. · Sáb 6:00 a. m. a 6:00 p. m. · Dom 7:00 a. m. a 1:00 p. m.</p></div></header>
+<div id="message" hidden></div>
+<section class="stats" id="plans" aria-label="Planes disponibles" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"></section>
+<div class="row">
+<section class="card flush" style="flex:0 1 640px;min-width:0">
+<div class="card-head"><h2>Descuentos por duración</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Duración</th><th scope="col">Descuento</th><th scope="col">Ejemplo con Estándar</th></tr></thead>
+<tbody id="durations"></tbody>
+</table></div>
+<p class="note">La matrícula se suma solo en la primera membresía del cliente.</p>
+</section>
+<section class="card side" id="edit-card" hidden>
+<form id="plan-form" class="form" novalidate>
+<h2 id="edit-title">Editar plan</h2>
+<div><label class="lbl" for="monthlyPrice">Precio mensual (COP)</label><input class="inp" id="monthlyPrice" type="number" min="1" step="1000"></div>
+<div><label class="lbl" for="description">Descripción</label><textarea class="inp" id="description" maxlength="255"></textarea></div>
+<p class="hint" style="margin:0">El cambio no afecta a las membresías ya vendidas.</p>
+<div class="actions"><button class="btn" type="submit">Guardar cambios</button><button class="btn2" type="button" id="cancel">Cancelar</button></div>
+</form>
+</section>
+</div>
+</main>
+</div>
+<script type="module" src="js/planes.js"></script>
+</body>
+</html>
