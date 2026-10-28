@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Entrenadores</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header"><div><h1>Entrenadores</h1><p>Cada cliente Premium tiene un entrenador asignado. Un entrenador atiende como máximo 20 clientes Premium.</p></div></header>
+<div id="message" hidden></div>
+<section class="card flush">
+<div class="card-head"><h2>Equipo de entrenadores</h2><span class="stat-sub" id="team-summary"></span></div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Entrenador</th><th scope="col">Especialidad</th><th scope="col">Turno</th><th scope="col">Clientes Premium</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acciones</span></th></tr></thead>
+<tbody id="trainers"></tbody>
+</table></div>
+</section>
+<div class="row" id="admin-cards" hidden>
+<section class="card half">
+<form id="trainer-form" class="form" novalidate>
+<h2 id="form-title">Registrar entrenador</h2>
+<div class="grid2">
+<div><label class="lbl" for="documentNumber">Documento</label><input class="inp" id="documentNumber" inputmode="numeric"></div>
+<div><label class="lbl" for="phone">Teléfono</label><input class="inp" id="phone" type="tel"></div>
+<div><label class="lbl" for="firstName">Nombres</label><input class="inp" id="firstName"></div>
+<div><label class="lbl" for="lastName">Apellidos</label><input class="inp" id="lastName"></div>
+<div><label class="lbl" for="specialty">Especialidad</label>
+<select class="inp" id="specialty"><option>Entrenamiento funcional</option><option>Pesas y fuerza</option><option>Acondicionamiento físico</option><option>Clases grupales y cardio</option></select></div>
+<div><label class="lbl" for="workSchedule">Turno</label>
+<select class="inp" id="workSchedule"><option>Mañana · 5:00 a. m. a 1:00 p. m.</option><option>Tarde · 1:00 p. m. a 10:00 p. m.</option></select></div>
+</div>
+<div class="actions"><button class="btn" type="submit" id="submit">Guardar entrenador</button><button class="btn2" type="reset" id="clear">Limpiar</button></div>
+</form>
+</section>
+<section class="card half">
+<form id="assign-form" class="form" novalidate>
+<h2>Asignar entrenador a cliente Premium</h2>
+<div><label class="lbl" for="premium-membership">Cliente Premium</label><select class="inp" id="premium-membership"></select></div>
+<div><label class="lbl" for="new-trainer">Entrenador</label><select class="inp" id="new-trainer"></select></div>
+<p class="hint" style="margin:0">Los entrenadores con cupo lleno no se pueden elegir hasta que se libere un cupo.</p>
+<div><button class="btn" type="submit">Asignar</button></div>
+</form>
+</section>
+</div>
+</main>
+</div>
+<script type="module" src="js/entrenadores.js"></script>
+</body>
+</html>

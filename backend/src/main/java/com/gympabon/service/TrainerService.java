@@ -102,6 +102,18 @@ public class TrainerService {
         trainerDAO.update(trainer);
     }
 
+    /**
+     * Activates again a trainer that was deactivated.
+     *
+     * @param trainerId identifier of the trainer
+     * @throws NotFoundException if the trainer does not exist
+     */
+    public void activateTrainer(int trainerId) {
+        Trainer trainer = findById(trainerId);
+        trainer.setActive(true);
+        trainerDAO.update(trainer);
+    }
+
     private void validate(Trainer trainer) {
         PersonValidator.validate(trainer);
         trainer.setSpecialty(PersonValidator.requireText(trainer.getSpecialty(), "La especialidad"));

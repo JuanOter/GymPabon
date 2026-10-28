@@ -80,4 +80,12 @@ public class TrainerController {
         sessionManager.requireAdmin(session);
         trainerService.deactivateTrainer(id);
     }
+
+    /** PATCH /api/trainers/{id}/activate (administrator) */
+    @PatchMapping("/{id}/activate")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void activate(@PathVariable("id") int id, HttpSession session) {
+        sessionManager.requireAdmin(session);
+        trainerService.activateTrainer(id);
+    }
 }

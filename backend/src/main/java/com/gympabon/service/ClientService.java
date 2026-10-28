@@ -109,6 +109,18 @@ public class ClientService {
         clientDAO.update(client);
     }
 
+    /**
+     * Activates again a client that was deactivated.
+     *
+     * @param clientId identifier of the client
+     * @throws NotFoundException if the client does not exist
+     */
+    public void activateClient(int clientId) {
+        Client client = findById(clientId);
+        client.setActive(true);
+        clientDAO.update(client);
+    }
+
     private void ensureDocumentIsFree(String documentNumber, int clientId) {
         Client existing = clientDAO.findByDocument(documentNumber);
         if (existing != null && existing.getId() != clientId) {

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymPabon · Panel principal</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar" aria-label="Menú principal"></nav>
+<main class="content">
+<header class="page-header">
+<div><h1>Panel principal</h1><p id="today"></p></div>
+<a class="btn" href="asistencia.html">Registrar ingreso</a>
+</header>
+<div id="message" hidden></div>
+<section class="stats" aria-label="Indicadores">
+<div class="card stat">
+<span class="stat-label">Clientes con membresía activa</span>
+<span class="stat-value" id="active-clients">—</span>
+<span class="stat-sub" id="clients-by-plan"></span>
+</div>
+<div class="card stat">
+<span class="stat-label">Ingresos registrados hoy</span>
+<span class="stat-value" id="today-entries">—</span>
+<span class="stat-sub" id="rejected-entries"></span>
+</div>
+<div class="card stat">
+<span class="stat-label">Membresías que vencen en 7 días</span>
+<span class="stat-value warn" id="expiring-count">—</span>
+<a href="#por-vencer">Ver y renovar</a>
+</div>
+<div class="card stat">
+<span class="stat-label" id="income-label">Recaudado este mes</span>
+<span class="stat-value" id="monthly-income">—</span>
+<span class="stat-sub">Pagos de membresías y matrículas</span>
+</div>
+</section>
+<div class="row">
+<section class="card flush grow" id="por-vencer">
+<div class="card-head"><h2>Membresías por vencer</h2><a class="link-plain" href="reportes.html" id="see-all" hidden>Ver todas</a></div>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Cliente</th><th scope="col">Plan</th><th scope="col">Vence</th><th scope="col">Estado</th><th scope="col"><span class="sr-only">Acción</span></th></tr></thead>
+<tbody id="expiring"></tbody>
+</table></div>
+</section>
+<section class="card side form" id="income-card" hidden>
+<h2 id="income-title">Recaudo del mes por plan</h2>
+<div class="form" id="income-by-plan"></div>
+</section>
+</div>
+</main>
+</div>
+<script type="module" src="js/inicio.js"></script>
+</body>
+</html>
